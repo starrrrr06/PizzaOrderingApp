@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PizzaOrderingApp</string>
+
+    <string-array name="Pizza_Options">
+        <item>Pepperoni Pizza</item>
+        <item>Cheese Pizza</item>
+        <item>Hawaiian Pizza</item>
+        <item>Vegetable Pizza</item>
+
+    </string-array>
+</resources>

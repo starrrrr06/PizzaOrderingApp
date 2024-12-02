@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1051949869782",
+    "project_id": "orderingapp-6de23",
+    "storage_bucket": "orderingapp-6de23.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051949869782:android:00d374fc1c2da927247777",
+        "android_client_info": {
+          "package_name": "com.example.pizzaorderingapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXzMB7B7kT7wM5L_9-uar_tPQdAz_DLX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
