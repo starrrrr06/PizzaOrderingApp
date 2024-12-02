@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,11 +25,21 @@ public class HomeScreenActivity extends AppCompatActivity {
     public static String MENU_SPINACH = "Spinach Pizza";
     public static String MENU_ALLMEAT = "All Meat Pizza";
 
+    private HashMap<String, Double> pizzaPrices;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen); // The layout containing the buttons
+
+        pizzaPrices = new HashMap<>();
+        pizzaPrices.put(MENU_PEPPERONI, 499.0);
+        pizzaPrices.put(MENU_HAWAIIAN, 399.0);
+        pizzaPrices.put(MENU_CHEESE, 399.0);
+        pizzaPrices.put(MENU_VEGETABLE, 299.0);
+        pizzaPrices.put(MENU_SPINACH, 399.0);
+        pizzaPrices.put(MENU_ALLMEAT, 699.0);
 
         // Find the home button by its ID
         Button homeButton = findViewById(R.id.home);
@@ -81,6 +92,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         menuArrayAdapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
 
         Spinner orderSpinner = (Spinner) findViewById(R.id.spinner_id);
+        TextView priceTextView = findViewById(R.id.price);
 
         orderSpinner.setAdapter(menuArrayAdapter);
 
@@ -89,6 +101,11 @@ public class HomeScreenActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 String selectedPizzaImage = menuArrayAdapter.getItem(i).toString();
+
+                Double price = pizzaPrices.getOrDefault(selectedPizzaImage, 0.0);
+
+                // Update the price TextView
+                priceTextView.setText(" Price: ₱" + String.format("%.2f", price));
 
                 //Generate Image
                 ImageView selectedPizza = (ImageView) findViewById(R.id.imageView);
@@ -115,7 +132,7 @@ public class HomeScreenActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                priceTextView.setText("Price: ₱0.00");
             }
         });
 
