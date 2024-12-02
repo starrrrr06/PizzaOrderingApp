@@ -24,20 +24,11 @@ public class HomeScreenActivity extends AppCompatActivity {
     public static String MENU_SPINACH = "Spinach Pizza";
     public static String MENU_ALLMEAT = "All Meat Pizza";
 
-    private HashMap<String, Double> pizzaPrices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen); // The layout containing the buttons
-
-        pizzaPrices = new HashMap<>();
-        pizzaPrices.put(MENU_CHEESE, 7.99);
-        pizzaPrices.put(MENU_VEGETABLE, 8.49);
-        pizzaPrices.put(MENU_HAWAIIAN, 9.99);
-        pizzaPrices.put(MENU_PEPPERONI, 8.99);
-        pizzaPrices.put(MENU_ALLMEAT, 10.99);
-        pizzaPrices.put(MENU_SPINACH, 8.99);
 
         // Find the home button by its ID
         Button homeButton = findViewById(R.id.home);
