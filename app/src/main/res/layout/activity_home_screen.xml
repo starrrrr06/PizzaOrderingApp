@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E1DCDD"
+    android:background="@drawable/cartbg"
     tools:context=".HomeScreenActivity">
 
     <ImageView
@@ -24,7 +24,7 @@
         android:id="@+id/order"
         android:layout_width="105dp"
         android:layout_height="34dp"
-        android:layout_marginTop="644dp"
+        android:layout_marginTop="656dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.947"
         app:layout_constraintStart_toStartOf="parent"

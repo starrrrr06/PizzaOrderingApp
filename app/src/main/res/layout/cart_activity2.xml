@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cart_list_view"
-        app:layout_constraintVertical_bias="0.576"
+        app:layout_constraintVertical_bias="0.419"
         app:layout_constraintWidth_percent=".8" />
 
     <Button
@@ -57,25 +57,26 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.939" />
+        app:layout_constraintVertical_bias="0.88" />
 
     <TextView
         android:id="@+id/totalPriceTextView"
-        android:layout_width="100dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="488dp"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="548dp"
+        android:gravity="center"
         android:text="Total: ₱0.00"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.893"
+        app:layout_constraintHorizontal_bias="0.943"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/cart_list_view"
-        android:layout_width="329dp"
-        android:layout_height="410dp"
+        android:layout_width="387dp"
+        android:layout_height="442dp"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
