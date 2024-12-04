@@ -25,7 +25,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     private static final int SMS_PERMISSION_CODE = 100;
     private static final String SHOP_OWNER_PHONE = "+1234567890"; // Replace with shop owner's phone number
 
-    private TextView customerNameTextView;
+    private TextView full_name;
     private TextView customerAddressTextView;
     private TextView customerContactTextView;
     private TextView orderTotalTextView;
@@ -36,7 +36,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_confirmation);
 
-        customerNameTextView = findViewById(R.id.customerNameTextView);
+        full_name = findViewById(R.id.customerNameTextView);
         customerAddressTextView = findViewById(R.id.customerAddressTextView);
         customerContactTextView = findViewById(R.id.customerContactTextView);
         orderTotalTextView = findViewById(R.id.orderTotalTextView);
@@ -49,7 +49,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         String orderTotal = getIntent().getStringExtra("order_total");
 
         // Set data to TextViews
-        customerNameTextView.setText(customerName != null ? customerName : "John Doe");
+        full_name.setText(customerName != null ? customerName : "John Doe");
         customerAddressTextView.setText(customerAddress != null ? customerAddress : "123 Main Street, Cityville");
         customerContactTextView.setText(customerContact != null ? customerContact : "+1234567890");
         orderTotalTextView.setText(orderTotal != null ? orderTotal : "₱0.00");
