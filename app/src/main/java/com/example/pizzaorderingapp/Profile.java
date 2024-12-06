@@ -101,7 +101,7 @@ public class Profile extends AppCompatActivity {
     }
 
     private void navigateToOrderConfirmation(String fullName, String contactNumber, String homeAddress, double totalPrice) {
-        Intent intent = new Intent(Profile.this, OrderConfirmationActivity.class);
+        Intent intent = new Intent(Profile.this, Profile.class);
         intent.putExtra("customer_name", fullName);
         intent.putExtra("customer_contact", contactNumber);
         intent.putExtra("customer_address", homeAddress);
