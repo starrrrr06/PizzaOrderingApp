@@ -5,49 +5,80 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffe6d6"
     tools:context=".LogInActivity"
     tools:ignore="MissingConstraints">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/loginpage"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
-
     <Button
         android:id="@+id/buttonRegister"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_width="123dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="560dp"
         android:onClick="register"
         android:padding="14dp"
-        android:text="Register"
+        android:text="REGISTER"
         android:textAllCaps="false"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent=".8" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="301dp"
-        android:layout_height="41dp"
-        android:layout_marginBottom="208dp"
+        android:layout_width="134dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="464dp"
         android:onClick="login"
-        android:text="LogIn"
+        android:text="SIGN IN"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="386dp"
+        android:layout_height="175dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pizzap" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="333dp"
+        android:layout_height="225dp"
+        android:layout_marginTop="164dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cats" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="203dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="544dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/register" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="183dp"
+        android:layout_height="93dp"
+        android:layout_marginTop="432dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/sign_in_" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

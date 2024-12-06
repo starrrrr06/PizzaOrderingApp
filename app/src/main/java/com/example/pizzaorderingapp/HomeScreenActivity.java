@@ -44,14 +44,14 @@ public class HomeScreenActivity extends AppCompatActivity {
         Button homeButton = findViewById(R.id.home);
 
         // Set an onClickListener to the home button
-        homeButton.setOnClickListener(new View.OnClickListener() {
+        /*homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Create an Intent to navigate to HomeScreenActivity (if needed)
                 Intent intent = new Intent(HomeScreenActivity.this, HomeScreenActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         // Find the cart button by its ID
         Button cartButton = findViewById(R.id.cart_id);

@@ -3,6 +3,7 @@ package com.example.pizzaorderingapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -53,6 +54,14 @@ public class RegisterActivity extends AppCompatActivity {
 
             register(email, pass, fullName, contactNumber, homeAddress); // Pass all fields to the register method
         });
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        // Hide the action bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
     }
 
     public void login(View view) {

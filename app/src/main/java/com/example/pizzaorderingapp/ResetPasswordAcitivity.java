@@ -1,15 +1,14 @@
 package com.example.pizzaorderingapp;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -37,5 +36,13 @@ public class ResetPasswordAcitivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             });
         });
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        // Hide the action bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
     }
 }

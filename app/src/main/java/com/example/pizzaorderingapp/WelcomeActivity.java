@@ -25,7 +25,17 @@ public class WelcomeActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_welcome);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        // Hide the action bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
     }
+
+
 
     public void register(View view){
         startActivity(new Intent(WelcomeActivity.this, RegisterActivity.class));
