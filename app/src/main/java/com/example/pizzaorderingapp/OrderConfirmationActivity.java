@@ -17,12 +17,12 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     private static final int SMS_PERMISSION_CODE = 100;
     private static final String SHOP_OWNER_PHONE = "09362288466"; // Replace with shop owner's phone number
 
-    private TextView full_name;
-    private TextView customerAddressTextView;
-    private TextView customerContactTextView;
-    private TextView orderTotalTextView;
-    private Button backToHomeButton;
-    private Button checkoutButton;
+    public TextView full_name;
+    public TextView customerAddressTextView;
+    public TextView customerContactTextView;
+    public TextView orderTotalTextView;
+    public Button backToHomeButton;
+    public Button checkoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,28 +34,28 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         customerContactTextView = findViewById(R.id.customerContactTextView);
         orderTotalTextView = findViewById(R.id.orderTotalTextView);
         backToHomeButton = findViewById(R.id.backToHomeButton);
-        checkoutButton = findViewById(R.id.checkoutButton); // New checkout button
+        checkoutButton = findViewById(R.id.checkoutButton);
 
-        // Get data from intent (if passed from previous activity)
+        // Get data from intent (passed from Profile activity)
         String customerName = getIntent().getStringExtra("customer_name");
         String customerAddress = getIntent().getStringExtra("customer_address");
         String customerContact = getIntent().getStringExtra("customer_contact");
-        String orderTotal = getIntent().getStringExtra("order_total");
-
-        // Ensure total price is fetched from CartActivity2
         double totalPrice = getIntent().getDoubleExtra("TOTAL_PRICE", 0.0);
-        if (orderTotal == null) {
-            orderTotal = "₱" + String.format("%.2f", totalPrice); // Default to calculated total price
-        }
 
-        // Set data to TextViews
-        full_name.setText(customerName != null ? customerName : "John Doe");
-        customerAddressTextView.setText(customerAddress != null ? customerAddress : "123 Main Street, Cityville");
-        customerContactTextView.setText(customerContact != null ? customerContact : "+1234567890");
-        orderTotalTextView.setText(orderTotal);
+        // Set the profile data to the respective TextViews
+        if (customerName != null) {
+            full_name.setText(customerName);
+        }
+        if (customerAddress != null) {
+            customerAddressTextView.setText(customerAddress);
+        }
+        if (customerContact != null) {
+            customerContactTextView.setText(customerContact);
+        }
+        orderTotalTextView.setText("₱" + String.format("%.2f", totalPrice));
 
         // Send SMS
-        sendOrderDetailsViaSms(customerName, customerAddress, customerContact, orderTotal);
+        sendOrderDetailsViaSms(customerName, customerAddress, customerContact, String.format("₱%.2f", totalPrice));
 
         // Handle back to home button click
         backToHomeButton.setOnClickListener(v -> finish());
@@ -76,16 +76,13 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     }
 
     private void sendOrderDetailsViaSms(String name, String address, String contact, String total) {
-        // Check for SMS permission
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            // Request permission
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_CODE);
         } else {
-            // Prepare and send SMS
             String message = "Order Details:\n"
-                    + "Customer Name: " + (name != null ? name : "John Doe") + "\n"
-                    + "Address: " + (address != null ? address : "123 Main Street, Cityville") + "\n"
-                    + "Contact: " + (contact != null ? contact : "+1234567890") + "\n"
+                    + "Customer Name: " + (name != null ? name : "") + "\n"
+                    + "Address: " + (address != null ? address : "") + "\n"
+                    + "Contact: " + (contact != null ? contact : "") + "\n"
                     + "Total: " + total;
 
             try {

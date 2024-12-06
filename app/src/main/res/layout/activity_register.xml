@@ -14,58 +14,57 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/loginpage"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="-52dp" />
+
 
     <EditText
         android:id="@+id/full_name"
         android:layout_width="292dp"
         android:layout_height="50dp"
-        android:layout_margin="10dp"
+        android:layout_marginTop="224dp"
         android:background="@drawable/shape"
         android:backgroundTint="@color/meduimGray"
         android:drawableLeft="@drawable/baseline_email_24"
         android:drawablePadding="13dp"
         android:hint=" Full Name"
+        android:maxLines="1"
         android:minHeight="48dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintBaseline_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/emailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="MissingConstraints"
-        android:maxLines="1"/>
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/emailAddress"
         android:layout_width="292dp"
         android:layout_height="50dp"
-        android:layout_margin="10dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/shape"
         android:backgroundTint="@color/meduimGray"
         android:drawableLeft="@drawable/baseline_email_24"
-        android:hint=" Email Address"
         android:drawablePadding="13dp"
+        android:hint=" Email Address"
+        android:maxLines="1"
         android:minHeight="48dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintBaseline_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/password"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
         app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        tools:ignore="MissingConstraints"
-        android:background="@drawable/shape"
-        android:maxLines="1"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/full_name"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="292dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/shape"
         android:backgroundTint="@color/meduimGray"
         android:drawableLeft="@drawable/baseline_key_24"
@@ -75,25 +74,65 @@
         android:minHeight="48dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/buttonRegister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailAddress"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/contact_number"
+        android:layout_width="292dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape"
+        android:backgroundTint="@color/meduimGray"
+        android:drawableLeft="@drawable/baseline_contact_phone_24"
+        android:drawablePadding="13dp"
+        android:hint=" Contact Number"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:minHeight="48dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+
+    <EditText
+        android:id="@+id/home_address"
+        android:layout_width="292dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape"
+        android:backgroundTint="@color/meduimGray"
+        android:drawableLeft="@drawable/baseline_home_24"
+        android:drawablePadding="13dp"
+        android:hint=" Home Address"
+        android:inputType="textPostalAddress"
+        android:maxLines="1"
+        android:minHeight="48dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contact_number" />
 
     <Button
         android:id="@+id/buttonRegister"
-        android:layout_width="0dp"
+        android:layout_width="329dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="76dp"
+        android:layout_marginTop="12dp"
         android:onClick="mainActivity"
         android:padding="14dp"
         android:text="Register"
         android:textAllCaps="false"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_address"
         app:layout_constraintWidth_percent=".8"
         tools:ignore="MissingConstraints" />
 
@@ -101,21 +140,21 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="76dp"
+        android:layout_marginTop="32dp"
         android:text="Already Registered?"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.336"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.212"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRegister" />
 
     <TextView
         android:id="@+id/signIn"
         android:layout_width="62dp"
         android:layout_height="25dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginTop="32dp"
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:onClick="login"
@@ -123,10 +162,10 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.267"
-        app:layout_constraintStart_toEndOf="@+id/textView6" />
+        app:layout_constraintHorizontal_bias="0.767"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRegister" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
