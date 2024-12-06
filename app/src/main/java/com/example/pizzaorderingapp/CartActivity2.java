@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,6 +22,8 @@ public class CartActivity2 extends AppCompatActivity {
     private ListView cartListView;
     private CartManager cartManager;
     private HashMap<String, Double> pizzaPrices;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,9 @@ public class CartActivity2 extends AppCompatActivity {
         pizzaPrices.put(HomeScreenActivity.MENU_VEGETABLE, 299.0);
         pizzaPrices.put(HomeScreenActivity.MENU_SPINACH, 399.0);
         pizzaPrices.put(HomeScreenActivity.MENU_ALLMEAT, 699.0);
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         totalPriceTextView = findViewById(R.id.totalPriceTextView);
         cartListView = findViewById(R.id.cart_list_view);
@@ -74,25 +82,53 @@ public class CartActivity2 extends AppCompatActivity {
             }
 
             // Calculate the total price
-            double finalTotalPrice = 0.0;
-            for (String item : cartItems) {
-                finalTotalPrice += pizzaPrices.getOrDefault(item, 0.0);
-            }
+            double finalTotalPrice = calculateTotalPrice(cartItems);
 
-            // Navigate to the Order Confirmation activity
-            Intent intent = new Intent(CartActivity2.this, OrderConfirmationActivity.class);
-            intent.putExtra("TOTAL_PRICE", finalTotalPrice);
-            startActivity(intent);
+            // Fetch profile data from Firestore and proceed to OrderConfirmationActivity
+            fetchAndProceedToConfirmation(finalTotalPrice);
         });
     }
 
     // Method to update the total price based on the cart items
     private void updateTotalPrice(List<String> cartItems) {
+        double totalPrice = calculateTotalPrice(cartItems);
+        totalPriceTextView.setText("Total: ₱" + String.format("%.2f", totalPrice));
+    }
+
+    // Method to calculate the total price
+    private double calculateTotalPrice(List<String> cartItems) {
         double totalPrice = 0.0;
         for (String item : cartItems) {
             totalPrice += pizzaPrices.getOrDefault(item, 0.0);
         }
-        // Update the total price TextView
-        totalPriceTextView.setText("Total: ₱" + String.format("%.2f", totalPrice));
+        return totalPrice;
+    }
+
+    // Method to fetch profile data and proceed to OrderConfirmationActivity
+    private void fetchAndProceedToConfirmation(double totalPrice) {
+        String userId = mAuth.getCurrentUser().getUid();
+
+        db.collection("Users").document(userId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String fullName = documentSnapshot.getString("fullName");
+                        String contactNumber = documentSnapshot.getString("contactNumber");
+                        String homeAddress = documentSnapshot.getString("homeAddress");
+
+                        // Pass data to OrderConfirmationActivity
+                        Intent intent = new Intent(CartActivity2.this, OrderConfirmationActivity.class);
+                        intent.putExtra("customer_name", fullName);
+                        intent.putExtra("customer_contact", contactNumber);
+                        intent.putExtra("customer_address", homeAddress);
+                        intent.putExtra("TOTAL_PRICE", totalPrice);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(CartActivity2.this, "Profile data not found!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(CartActivity2.this, "Error fetching profile: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 }
