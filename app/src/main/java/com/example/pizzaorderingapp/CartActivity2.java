@@ -65,37 +65,24 @@ public class CartActivity2 extends AppCompatActivity {
             Toast.makeText(CartActivity2.this, "Cart cleared", Toast.LENGTH_SHORT).show();
         });
 
-        // Set up the checkout button
-        Button checkoutButton = findViewById(R.id.make_order);
-        checkoutButton.setOnClickListener(v -> {
+        // Set up the proceed to Order Confirmation button
+        Button proceedButton = findViewById(R.id.make_order);
+        proceedButton.setOnClickListener(v -> {
             if (cartItems.isEmpty()) {
                 Toast.makeText(CartActivity2.this, "Your cart is empty!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Calculate the total price (optional, to ensure it's accurate)
+            // Calculate the total price
             double finalTotalPrice = 0.0;
             for (String item : cartItems) {
                 finalTotalPrice += pizzaPrices.getOrDefault(item, 0.0);
             }
 
-            // Show a confirmation message
-            Toast.makeText(CartActivity2.this,
-                    "Thank you for your order! Total: ₱" + String.format("%.2f", finalTotalPrice),
-                    Toast.LENGTH_LONG).show();
-
             // Navigate to the Order Confirmation activity
             Intent intent = new Intent(CartActivity2.this, OrderConfirmationActivity.class);
             intent.putExtra("TOTAL_PRICE", finalTotalPrice);
             startActivity(intent);
-
-            // Clear the cart
-            CartManager.getInstance().clearCart();
-            adapter.clear();
-            adapter.notifyDataSetChanged();
-
-            // Reset the total price to 0
-            updateTotalPrice(CartManager.getInstance().getCartItems());
         });
     }
 
