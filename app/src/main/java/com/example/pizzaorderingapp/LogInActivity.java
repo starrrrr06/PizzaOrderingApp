@@ -36,7 +36,7 @@ public class LogInActivity extends AppCompatActivity {
         forgotPass = findViewById(R.id.forgotPass);
 
         buttonLogin.setOnClickListener(view -> {
-            performLogin(emailAddress.getText().toString(),password.getText().toString());
+            performLogin(emailAddress.getText().toString(), password.getText().toString());
         });
 
         forgotPass.setOnClickListener(view -> {
@@ -52,7 +52,7 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 
-    public void register(View view){
+    public void register(View view) {
         startActivity(new Intent(LogInActivity.this, RegisterActivity.class));
     }
 
@@ -60,21 +60,34 @@ public class LogInActivity extends AppCompatActivity {
         startActivity(new Intent(LogInActivity.this, HomeScreenActivity.class));
     }
 
-    private void performLogin(String email, String password){
+    private void performLogin(String email, String password) {
+        // Check if the fields are empty
+        if (email.isEmpty()) {
+            emailAddress.setError("Email is required");
+            emailAddress.requestFocus();
+            return;
+        }
+
+        if (password.isEmpty()) {
+            this.password.setError("Password is required");
+            this.password.requestFocus();
+            return;
+        }
+
+        // Proceed with Firebase Authentication if fields are not empty
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
+            if (task.isSuccessful()) {
                 Toast.makeText(LogInActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(LogInActivity.this, HomeScreenActivity.class));
-            }else{
+            } else {
                 try {
                     throw task.getException();
-
-                }catch(FirebaseAuthInvalidUserException e){
+                } catch (FirebaseAuthInvalidUserException e) {
                     Toast.makeText(LogInActivity.this, "Invalid email address", Toast.LENGTH_LONG).show();
-                }catch(FirebaseAuthInvalidCredentialsException e){
+                } catch (FirebaseAuthInvalidCredentialsException e) {
                     Toast.makeText(LogInActivity.this, "Invalid password", Toast.LENGTH_LONG).show();
-                }catch(Exception e){
-                    Toast.makeText(LogInActivity.this, "An error occured", Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(LogInActivity.this, "An error occurred", Toast.LENGTH_LONG).show();
                 }
             }
         });
