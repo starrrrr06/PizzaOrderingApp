@@ -85,7 +85,7 @@ public class CartActivity2 extends AppCompatActivity {
             double finalTotalPrice = calculateTotalPrice(cartItems);
 
             // Fetch profile data from Firestore and proceed to OrderConfirmationActivity
-            fetchAndProceedToConfirmation(finalTotalPrice);
+            fetchAndProceedToConfirmation(finalTotalPrice, cartItems);
         });
     }
 
@@ -105,7 +105,7 @@ public class CartActivity2 extends AppCompatActivity {
     }
 
     // Method to fetch profile data and proceed to OrderConfirmationActivity
-    private void fetchAndProceedToConfirmation(double totalPrice) {
+    private void fetchAndProceedToConfirmation(double totalPrice, List<String> cartItems) {
         String userId = mAuth.getCurrentUser().getUid();
 
         db.collection("Users").document(userId)
@@ -122,6 +122,9 @@ public class CartActivity2 extends AppCompatActivity {
                         intent.putExtra("customer_contact", contactNumber);
                         intent.putExtra("customer_address", homeAddress);
                         intent.putExtra("TOTAL_PRICE", totalPrice);
+
+                        // Pass pizza names as an array
+                        intent.putExtra("PIZZA_NAMES", cartItems.toArray(new String[0]));
                         startActivity(intent);
                     } else {
                         Toast.makeText(CartActivity2.this, "Profile data not found!", Toast.LENGTH_SHORT).show();

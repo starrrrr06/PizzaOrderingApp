@@ -62,13 +62,23 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                         String contactNumber = documentSnapshot.getString("contactNumber");
                         String homeAddress = documentSnapshot.getString("homeAddress");
                         double orderTotal = getIntent().getDoubleExtra("TOTAL_PRICE", 0.0);
-                        String pizzaName = getIntent().getStringExtra("PIZZA_NAME"); // Get the pizza name from the intent
+                        String[] pizzaNames = getIntent().getStringArrayExtra("PIZZA_NAMES"); // Get the pizza names from the intent
 
                         customerNameTextView.setText(fullName != null ? fullName : "Name not provided");
                         customerAddressTextView.setText(homeAddress != null ? homeAddress : "Address not provided");
                         customerContactTextView.setText(contactNumber != null ? contactNumber : "Contact not provided");
                         orderTotalTextView.setText("₱" + String.format("%.2f", orderTotal));
-                        pizzaNameTextView.setText(pizzaName != null ? pizzaName : "Pizza not selected"); // Set the pizza name
+
+                        // Join pizza names into a single string to display
+                        if (pizzaNames != null && pizzaNames.length > 0) {
+                            StringBuilder pizzaList = new StringBuilder();
+                            for (String pizza : pizzaNames) {
+                                pizzaList.append(pizza).append("\n");
+                            }
+                            pizzaNameTextView.setText(pizzaList.toString());
+                        } else {
+                            pizzaNameTextView.setText("No pizza selected");
+                        }
                     } else {
                         Toast.makeText(this, "User data not found", Toast.LENGTH_SHORT).show();
                     }
