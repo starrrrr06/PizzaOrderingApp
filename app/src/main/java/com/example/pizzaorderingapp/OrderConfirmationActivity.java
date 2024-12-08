@@ -1,97 +1,74 @@
 package com.example.pizzaorderingapp;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class OrderConfirmationActivity extends AppCompatActivity {
 
-    private static final int SMS_PERMISSION_CODE = 100;
-    private static final String SHOP_OWNER_PHONE = "09362288466"; // Replace with shop owner's phone number
-
-    // Firebase instances
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
-    // UI components
-    public TextView fullNameTextView;
-    public TextView customerAddressTextView;
-    public TextView customerContactTextView;
-    public TextView orderTotalTextView;
-    public Button backToHomeButton;
-    public Button checkoutButton;
+    private TextView customerNameTextView;
+    private TextView customerAddressTextView;
+    private TextView customerContactTextView;
+    private TextView orderTotalTextView;
+    private TextView pizzaNameTextView;  // TextView to display pizza name
+    private Button sendOrderButton;
+    private Button backToHomeButton;  // Button to navigate back to home
+
+    private static final String EMAIL_ADDRESS = "apppizza44@gmail.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_confirmation);
 
-        // Initialize Firebase and UI components
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        fullNameTextView = findViewById(R.id.customerNameTextView);
+        customerNameTextView = findViewById(R.id.customerNameTextView);
         customerAddressTextView = findViewById(R.id.customerAddressTextView);
         customerContactTextView = findViewById(R.id.customerContactTextView);
         orderTotalTextView = findViewById(R.id.orderTotalTextView);
-        backToHomeButton = findViewById(R.id.backToHomeButton);
-        checkoutButton = findViewById(R.id.checkoutButton);
+        pizzaNameTextView = findViewById(R.id.pizzaNameTextView);  // Initialize pizza name TextView
+        sendOrderButton = findViewById(R.id.checkoutButton);
+        backToHomeButton = findViewById(R.id.backToHomeButton);  // Initialize back button
 
-        // Fetch and display order details
         loadOrderDetails();
 
-        // Back to Home button
-        backToHomeButton.setOnClickListener(v -> finish());
+        sendOrderButton.setOnClickListener(v -> sendOrderDetails());
 
-        // Checkout button
-        checkoutButton.setOnClickListener(v -> {
-            String totalText = orderTotalTextView.getText().toString().replace("₱", "");
-            double totalPrice = Double.parseDouble(totalText);
-
-            if (totalPrice <= 0) {
-                Toast.makeText(this, "No items to checkout!", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Order has been confirmed and is being processed!", Toast.LENGTH_LONG).show();
-                finish();
-            }
-        });
+        // Set up the back to home button
+        backToHomeButton.setOnClickListener(v -> goBackToHome());
     }
 
     private void loadOrderDetails() {
         String userId = mAuth.getCurrentUser().getUid();
 
-        // Fetch user and order data from Firestore
         db.collection("Users").document(userId)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        // Fetch user details
                         String fullName = documentSnapshot.getString("fullName");
                         String contactNumber = documentSnapshot.getString("contactNumber");
                         String homeAddress = documentSnapshot.getString("homeAddress");
+                        double orderTotal = getIntent().getDoubleExtra("TOTAL_PRICE", 0.0);
+                        String pizzaName = getIntent().getStringExtra("PIZZA_NAME"); // Get the pizza name from the intent
 
-                        // Fetch order total (mock value or Firestore integration for dynamic total)
-                        double orderTotal = getIntent().getDoubleExtra("TOTAL_PRICE", 500.0);
-
-                        // Display details in TextViews
-                        fullNameTextView.setText(fullName != null ? fullName : "Name not provided");
+                        customerNameTextView.setText(fullName != null ? fullName : "Name not provided");
                         customerAddressTextView.setText(homeAddress != null ? homeAddress : "Address not provided");
                         customerContactTextView.setText(contactNumber != null ? contactNumber : "Contact not provided");
                         orderTotalTextView.setText("₱" + String.format("%.2f", orderTotal));
-
-                        // Optionally send SMS
-                        sendOrderDetailsViaSms(fullName, homeAddress, contactNumber, String.format("₱%.2f", orderTotal));
+                        pizzaNameTextView.setText(pizzaName != null ? pizzaName : "Pizza not selected"); // Set the pizza name
                     } else {
                         Toast.makeText(this, "User data not found", Toast.LENGTH_SHORT).show();
                     }
@@ -99,35 +76,45 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> Toast.makeText(this, "Error fetching data: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
-    private void sendOrderDetailsViaSms(String name, String address, String contact, String total) {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_CODE);
-        } else {
-            String message = "Order Details:\n"
-                    + "Customer Name: " + (name != null ? name : "N/A") + "\n"
-                    + "Address: " + (address != null ? address : "N/A") + "\n"
-                    + "Contact: " + (contact != null ? contact : "N/A") + "\n"
-                    + "Total: " + total;
+    private void sendOrderDetails() {
+        String name = customerNameTextView.getText().toString();
+        String address = customerAddressTextView.getText().toString();
+        String contact = customerContactTextView.getText().toString();
+        String total = orderTotalTextView.getText().toString();
+        String pizzaName = pizzaNameTextView.getText().toString();  // Get the pizza name
 
-            try {
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(SHOP_OWNER_PHONE, null, message, null, null);
-                Toast.makeText(this, "Order details sent via SMS", Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-                Toast.makeText(this, "Failed to send SMS: " + e.getMessage(), Toast.LENGTH_LONG).show();
-            }
+        if (name.isEmpty() || address.isEmpty() || contact.isEmpty() || total.isEmpty() || pizzaName.isEmpty()) {
+            Toast.makeText(this, "Incomplete order details!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String emailSubject = "Pizza Order Details";
+        String emailBody = "Order Details:\n\n"
+                + "Name: " + name + "\n"
+                + "Address: " + address + "\n"
+                + "Contact: " + contact + "\n"
+                + "Pizza: " + pizzaName + "\n"
+                + "Total: " + total;
+
+        // Create an Intent to send an email
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+        emailIntent.setData(Uri.parse("mailto:")); // Ensure only email apps handle this
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{EMAIL_ADDRESS});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, emailSubject);
+        emailIntent.putExtra(Intent.EXTRA_TEXT, emailBody);
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send email..."));
+            Toast.makeText(this, "Please click the sent and we will process the Orders", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "Error: Unable to launch email app!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == SMS_PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "SMS permission granted", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "SMS permission denied", Toast.LENGTH_SHORT).show();
-            }
-        }
+    private void goBackToHome() {
+        // Navigate back to the home screen
+        Intent homeIntent = new Intent(OrderConfirmationActivity.this, HomeScreenActivity.class);  // Replace MainActivity with your home screen activity
+        startActivity(homeIntent);
+        finish();  // Optional: To ensure the current activity is closed after navigating
     }
 }
