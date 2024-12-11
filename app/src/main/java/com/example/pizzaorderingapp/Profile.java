@@ -1,5 +1,6 @@
 package com.example.pizzaorderingapp;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -38,6 +39,7 @@ public class Profile extends AppCompatActivity {
         homeButton = findViewById(R.id.home);
         profileButton = findViewById(R.id.profile);
         cartButton = findViewById(R.id.cart_id);
+        Button logoutButton = findViewById(R.id.buttonLogout);
 
         // Load existing profile data
         loadProfileData();
@@ -48,13 +50,15 @@ public class Profile extends AppCompatActivity {
         // Set up navigation button click listeners
         homeButton.setOnClickListener(view -> navigateToHome());
         cartButton.setOnClickListener(view -> navigateToCart());
+
+        // Logout button click listener
+        logoutButton.setOnClickListener(view -> confirmLogout());
     }
 
     private void loadProfileData() {
-        // Retrieve user's email from FirebaseAuth and display it in the TextView
         String email = mAuth.getCurrentUser().getEmail();
         if (email != null) {
-            emailTextView.setText(email); // Display email in the TextView (read-only)
+            emailTextView.setText(email);
         }
 
         // Retrieve user's full name, contact number, and home address from Firestore
@@ -64,12 +68,11 @@ public class Profile extends AppCompatActivity {
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        // Retrieve data from Firestore and load it into EditTexts
+
                         String fullName = documentSnapshot.getString("fullName");
                         String contactNumber = documentSnapshot.getString("contactNumber");
                         String homeAddress = documentSnapshot.getString("homeAddress");
 
-                        // Set the data to EditTexts
                         fullNameEditText.setText(fullName);
                         contactNumberEditText.setText(contactNumber);
                         homeAddressEditText.setText(homeAddress);
@@ -105,6 +108,25 @@ public class Profile extends AppCompatActivity {
                         Toast.makeText(Profile.this, "Error updating profile: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         }
+    }
+
+    private void confirmLogout() {
+        new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Yes", (dialog, which) -> logout())
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
+    private void logout() {
+        mAuth.signOut();
+        Toast.makeText(this, "Logged out successfully!", Toast.LENGTH_SHORT).show();
+
+        // Redirect to login screen
+        Intent intent = new Intent(Profile.this, LogInActivity.class); // Replace LoginActivity with your login activity class
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear the activity stack
+        startActivity(intent);
     }
 
     private void navigateToOrderConfirmation(String fullName, String contactNumber, String homeAddress, double totalPrice) {
