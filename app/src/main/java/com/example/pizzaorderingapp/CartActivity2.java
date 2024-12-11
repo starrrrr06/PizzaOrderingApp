@@ -154,4 +154,4 @@ public class CartActivity2 extends AppCompatActivity {
                     Toast.makeText(CartActivity2.this, "Error fetching profile: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
-}
+}.
