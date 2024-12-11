@@ -94,10 +94,21 @@
 
     <Button
         android:id="@+id/buttonSave"
-        android:layout_width="140dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="580dp"
+        android:layout_width="130dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="557dp"
         android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="130dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="636dp"
+        android:text="Logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,10 +128,11 @@
 
     <ImageView
         android:id="@+id/imageView21"
-        android:layout_width="185dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="572dp"
+        android:layout_width="166dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="548dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/savess" />
@@ -135,6 +147,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/widgets" />
+
+    <ImageView
+        android:id="@+id/imageView21"
+        android:layout_width="181dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="624dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
