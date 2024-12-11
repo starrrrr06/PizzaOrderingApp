@@ -87,6 +87,26 @@ public class CartActivity2 extends AppCompatActivity {
             // Fetch profile data from Firestore and proceed to OrderConfirmationActivity
             fetchAndProceedToConfirmation(finalTotalPrice, cartItems);
         });
+
+        // Add functionality for the profile button
+        Button profileButton = findViewById(R.id.profile);
+        profileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(CartActivity2.this, Profile.class);
+            startActivity(intent);
+        });
+
+        // Add functionality for the cart button
+        Button cartButton = findViewById(R.id.cart_id);
+        cartButton.setOnClickListener(v -> {
+            Toast.makeText(CartActivity2.this, "You are already in the Cart page!", Toast.LENGTH_SHORT).show();
+        });
+
+        // Add functionality for the home button
+        Button homeButton = findViewById(R.id.home);
+        homeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(CartActivity2.this, HomeScreenActivity.class);
+            startActivity(intent);
+        });
     }
 
     // Method to update the total price based on the cart items

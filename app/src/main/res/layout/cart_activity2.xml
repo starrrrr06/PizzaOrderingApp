@@ -4,85 +4,148 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CartActivity2"
-    android:padding="10dp"
-    android:background="@drawable/cartbg">
+    android:background="#ffe6d6"
+    tools:context=".CartActivity2">
 
-    <TextView
-        android:id="@+id/mycart_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Cart"
-        android:textSize="30sp"
+
+    <Button
+        android:id="@+id/cart_id"
+        android:layout_width="54dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="772dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.126"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:background="@color/purple_500"
+    <Button
+        android:id="@+id/profile"
+        android:layout_width="44dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="768dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.852"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/home"
+        android:layout_width="54dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="768dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="339dp"
+        android:layout_height="143dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mycart_txt"
-        app:layout_constraintWidth_percent=".6" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mycart" />
+
 
     <Button
         android:id="@+id/make_order"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
+        android:layout_width="124dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="596dp"
         android:padding="14dp"
         android:text="Check Out"
         android:textAllCaps="false"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.156"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cart_list_view"
-        app:layout_constraintVertical_bias="0.419"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/clear"
-        android:layout_width="140dp"
-        android:layout_height="53dp"
+        android:layout_width="117dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="596dp"
         android:padding="14dp"
         android:text="Clear"
         android:textAllCaps="false"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.869"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView18"
+        android:layout_width="381dp"
+        android:layout_height="478dp"
+        android:layout_marginTop="86dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.88" />
+        app:srcCompat="@drawable/bg" />
 
     <TextView
         android:id="@+id/totalPriceTextView"
-        android:layout_width="110dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="548dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="468dp"
         android:gravity="center"
         android:text="Total: ₱0.00"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.943"
+        app:layout_constraintHorizontal_bias="0.91"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ListView
         android:id="@+id/cart_list_view"
-        android:layout_width="387dp"
-        android:layout_height="442dp"
+        android:layout_width="342dp"
+        android:layout_height="367dp"
+        android:layout_marginTop="128dp"
         android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="136dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="576dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.894"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/claear" />
+
+    <ImageView
+        android:id="@+id/imageView17"
+        android:layout_width="143dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="568dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/chekcout" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="433dp"
+        android:layout_height="114dp"
+        android:layout_marginTop="728dp"
+        android:layout_marginEnd="7dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.258" />
+        app:srcCompat="@drawable/widgets" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
