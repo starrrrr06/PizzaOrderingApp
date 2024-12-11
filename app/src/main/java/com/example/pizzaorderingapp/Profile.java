@@ -41,7 +41,10 @@ public class Profile extends AppCompatActivity {
 
         // Set up Save button click listener
         saveButton.setOnClickListener(view -> saveProfileData());
+
     }
+
+
 
     private void loadProfileData() {
         // Retrieve user's email from FirebaseAuth and display it in the TextView

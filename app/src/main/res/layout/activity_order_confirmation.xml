@@ -9,15 +9,27 @@
     android:background="#ffe6d6">
 
 
+    <ImageView
+        android:id="@+id/imageView24"
+        android:layout_width="407dp"
+        android:layout_height="321dp"
+        android:layout_marginTop="180dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bgg" />
 
     <TextView
         android:id="@+id/nameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="220dp"
         android:text="Customer Name:"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/customerNameTextView"
@@ -31,16 +43,18 @@
         app:layout_constraintHorizontal_bias="0" />
 
     <!-- Address -->
+
     <TextView
         android:id="@+id/addressLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="250dp"
         android:text="Address:"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/nameLabel"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/customerAddressTextView"
@@ -54,16 +68,20 @@
         app:layout_constraintHorizontal_bias="0" />
 
     <!-- Contact Number -->
+
     <TextView
         android:id="@+id/contactLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="280dp"
         android:text="Contact Number:"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/addressLabel"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Order Total -->
 
     <TextView
         android:id="@+id/customerContactTextView"
@@ -71,22 +89,26 @@
         android:layout_height="wrap_content"
         android:text="+1234567890"
         android:textSize="16sp"
-        app:layout_constraintTop_toTopOf="@id/contactLabel"
-        app:layout_constraintStart_toEndOf="@id/contactLabel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/contactLabel"
+        app:layout_constraintTop_toTopOf="@id/contactLabel" />
 
-    <!-- Order Total -->
     <TextView
         android:id="@+id/orderTotalLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="310dp"
         android:text="Order Total:"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/contactLabel"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Pizza Name -->
+
+    <!-- Back to Home Button -->
 
     <TextView
         android:id="@+id/orderTotalTextView"
@@ -95,23 +117,23 @@
         android:text="₱999.00"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/orderTotalLabel"
-        app:layout_constraintStart_toEndOf="@id/orderTotalLabel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/orderTotalLabel"
+        app:layout_constraintTop_toTopOf="@id/orderTotalLabel" />
 
-    <!-- Pizza Name -->
     <TextView
         android:id="@+id/pizzaNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="337dp"
+        android:maxLines="2"
         android:text="Pizza Name:"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/orderTotalLabel"
         app:layout_constraintStart_toStartOf="parent"
-        android:maxLines="2"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/pizzaNameTextView"
@@ -120,36 +142,68 @@
         android:text="Margherita"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/pizzaNameLabel"
         app:layout_constraintTop_toTopOf="@id/pizzaNameLabel" />
 
-    <!-- Back to Home Button -->
-
     <Button
         android:id="@+id/backToHomeButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="124dp"
+        android:layout_height="47dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="644dp"
         android:backgroundTint="@color/purple_500"
         android:text="Back to Home"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/orderTotalLabel" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/checkoutButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_width="142dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="644dp"
         android:text="Checkout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.877"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backToHomeButton" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView19"
+        android:layout_width="391dp"
+        android:layout_height="101dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/oconform" />
+
+    <ImageView
+        android:id="@+id/imageView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="628dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cout" />
+
+    <ImageView
+        android:id="@+id/imageView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="628dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/home" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
