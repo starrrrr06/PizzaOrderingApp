@@ -18,7 +18,7 @@ public class Profile extends AppCompatActivity {
     FirebaseFirestore db;
     TextView emailTextView; // TextView for displaying email
     EditText fullNameEditText, contactNumberEditText, homeAddressEditText; // EditTexts for user inputs
-    Button saveButton;
+    Button saveButton, homeButton, profileButton, cartButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,9 @@ public class Profile extends AppCompatActivity {
         homeAddressEditText = findViewById(R.id.editTextHomeAddress);
 
         saveButton = findViewById(R.id.buttonSave);
+        homeButton = findViewById(R.id.home);
+        profileButton = findViewById(R.id.profile);
+        cartButton = findViewById(R.id.cart_id);
 
         // Load existing profile data
         loadProfileData();
@@ -42,9 +45,10 @@ public class Profile extends AppCompatActivity {
         // Set up Save button click listener
         saveButton.setOnClickListener(view -> saveProfileData());
 
+        // Set up navigation button click listeners
+        homeButton.setOnClickListener(view -> navigateToHome());
+        cartButton.setOnClickListener(view -> navigateToCart());
     }
-
-
 
     private void loadProfileData() {
         // Retrieve user's email from FirebaseAuth and display it in the TextView
@@ -109,6 +113,16 @@ public class Profile extends AppCompatActivity {
         intent.putExtra("customer_contact", contactNumber);
         intent.putExtra("customer_address", homeAddress);
         intent.putExtra("TOTAL_PRICE", totalPrice);
+        startActivity(intent);
+    }
+
+    private void navigateToHome() {
+        Intent intent = new Intent(Profile.this, HomeScreenActivity.class); // Replace HomeActivity with your actual home activity class
+        startActivity(intent);
+    }
+
+    private void navigateToCart() {
+        Intent intent = new Intent(Profile.this, CartActivity2.class); // Replace CartActivity with your actual cart activity class
         startActivity(intent);
     }
 }

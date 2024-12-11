@@ -13,6 +13,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -40,18 +44,18 @@ public class HomeScreenActivity extends AppCompatActivity {
         pizzaPrices.put(MENU_SPINACH, 399.0);
         pizzaPrices.put(MENU_ALLMEAT, 699.0);
 
-        // Find the home button by its ID
-        Button homeButton = findViewById(R.id.home);
+        if (FirebaseApp.getApps(this).isEmpty()) {
+            FirebaseApp.initializeApp(this);
+        }
 
-        // Set an onClickListener to the home button
-        /*homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create an Intent to navigate to HomeScreenActivity (if needed)
-                Intent intent = new Intent(HomeScreenActivity.this, HomeScreenActivity.class);
-                startActivity(intent);
-            }
-        });*/
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+
+        if (currentUser == null) {
+            startActivity(new Intent(this, WelcomeActivity.class));
+            finish();
+            return;
+        }
 
         // Find the cart button by its ID
         Button cartButton = findViewById(R.id.cart_id);
