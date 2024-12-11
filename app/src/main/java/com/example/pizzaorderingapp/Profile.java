@@ -125,4 +125,4 @@ public class Profile extends AppCompatActivity {
         Intent intent = new Intent(Profile.this, CartActivity2.class); // Replace CartActivity with your actual cart activity class
         startActivity(intent);
     }
-}.
+}
